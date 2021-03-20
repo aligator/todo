@@ -15,6 +15,10 @@ pub fn build(b: *Builder) void {
     const exe = b.addExecutable("todo", "src/main.zig");
     exe.setTarget(target);
     exe.setBuildMode(mode);
+
+    exe.linkSystemLibrary("curl");
+    exe.linkLibC();
+    pkgs.addAllTo(exe);
     exe.install();
 
     const run_cmd = exe.run();
